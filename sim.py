@@ -14,14 +14,14 @@ for i in range(49):
     circle_draw.append(False) 
 
 def initial():
-    global pos, loc, line, permanent, blue, red, count,freq,countfir,circle_draw
-    pos = []
-    loc = []
+    global position, location, line, permanent, blue, red, count,freq,countfir,circle_draw
+    position = []
+    location = []
     freq = []
     for i in range(49):
         tup = ((i%7)*100+100,(i//7)*100+100)
-        loc.append(tup)
-        pos.append(False)
+        location.append(tup)
+        position.append(False)
         freq.append(0)
     line = 'no'
     permanent = []
@@ -84,8 +84,8 @@ while(running):
         
     if(pygame.mouse.get_pressed() == (1,0,0) and run == True):
         for i in range(49):
-            if(pygame.mouse.get_pos()[0] < (loc[i][0]+5) and pygame.mouse.get_pos()[0] > (loc[i][0]-5) and pygame.mouse.get_pos()[1] < (loc[i][1]+5) and pygame.mouse.get_pos()[1] > (loc[i][1]-5)):
-                pos[i] = True
+            if(pygame.mouse.get_pos()[0] < (location[i][0]+5) and pygame.mouse.get_pos()[0] > (location[i][0]-5) and pygame.mouse.get_pos()[1] < (location[i][1]+5) and pygame.mouse.get_pos()[1] > (location[i][1]-5)):
+                position[i] = True
                 circle_draw[i] = True
                 if(countfir == -1):
                     countfir = i
@@ -99,26 +99,26 @@ while(running):
     if(run):
         for i in range(49):
             if (circle_draw[i] == True):
-                pygame.draw.circle(window, (255,0,0), loc[i], 5, border_width)
+                pygame.draw.circle(window, (255,0,0), location[i], 5, border_width)
             else:
-                pygame.draw.circle(window, colour, loc[i], 5, border_width)
+                pygame.draw.circle(window, colour, location[i], 5, border_width)
    
     for i in range(49):
         
-        if (pos[i] == True):
+        if (position[i] == True):
         
             for j in range(49):
         
                 if(i == j):
                     continue
         
-                elif(pos[j] == True):
+                elif(position[j] == True):
                     add = []
                     
-                    pygame.draw.line(window, colour, loc[i], loc[j], 2)
+                    pygame.draw.line(window, colour, location[i], location[j], 2)
                     count += 1
                     for k in range(49):
-                        pos[k] = False 
+                        position[k] = False 
                     add.append(i)
                     add.append(j)
                 
@@ -130,10 +130,10 @@ while(running):
     for k in range(len(permanent)):
        
         if(k%2 == 0):
-            pygame.draw.line(window, (255,255,255), loc[permanent[k][0]], loc[permanent[k][1]], 2)
+            pygame.draw.line(window, (255,255,255), location[permanent[k][0]], location[permanent[k][1]], 2)
        
         if(k%2 == 1):
-            pygame.draw.line(window, (68,214,44), loc[permanent[k][0]], loc[permanent[k][1]], 2)
+            pygame.draw.line(window, (68,214,44), location[permanent[k][0]], location[permanent[k][1]], 2)
 
     counter = 0
     for k in freq:
